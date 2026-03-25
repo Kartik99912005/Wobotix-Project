@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webotix · enterprise IT redefined</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- AOS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Swiper -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafc;
+      color: #1e293b;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    /* header */
+    header {
+      background: #ffffff;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      background-color: rgba(255,255,255,0.95);
+      border-bottom: 1px solid rgba(0,20,80,0.05);
+    }
+    .header-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 80px;
+    }
+    .logo {
+      font-size: 2.2rem;
+      font-weight: 800;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(145deg, #0b2b5c, #1e4a8b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.5px;
+      cursor: pointer;
+    }
+    .nav-menu {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+    .nav-menu a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1e293b;
+      transition: 0.2s ease;
+      font-size: 1rem;
+      border-bottom: 2px solid transparent;
+      padding-bottom: 4px;
+      cursor: pointer;
+    }
+    .nav-menu a:hover, .nav-menu a.active-page {
+      color: #2563eb;
+      border-bottom-color: #2563eb;
+    }
+    .hamburger {
+      display: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #0b2b5c;
+    }
+    @media (max-width: 768px) {
+      .nav-menu {
+        position: fixed;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        gap: 0;
+        padding: 20px 0;
+        box-shadow: 0 20px 30px rgba(0,0,0,0.05);
+        transform: translateY(-150%);
+        opacity: 0;
+        transition: 0.3s;
+        pointer-events: none;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .nav-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        pointer-events: all;
+      }
+      .nav-menu a {
+        padding: 16px 24px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .hamburger {
+        display: block;
+      }
+    }
+
+    /* page system */
+    .page {
+      display: none;
+      animation: fadePage 0.4s ease;
+    }
+    .page.active {
+      display: block;
+    }
+    @keyframes fadePage {
+      0% { opacity: 0.3; transform: translateY(8px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* hero (home) - more attractive background */
+    .hero {
+      background: linear-gradient(105deg, #0b1f3ee0, #1e3a6fe0), url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2034&auto=format&fit=crop') center/cover no-repeat fixed;
+      background-blend-mode: overlay;
+      color: white;
+      padding: 160px 0 170px;
+      position: relative;
+      isolation: isolate;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 40%, rgba(37,99,235,0.25) 0%, transparent 60%);
+      z-index: -1;
+    }
+    .hero h1 { font-size: 4.5rem; font-weight: 800; line-height: 1.2; margin-bottom: 24px; text-shadow: 0 4px 15px rgba(0,0,0,0.4); }
+    .hero .subhead { font-size: 2rem; font-weight: 400; margin-bottom: 20px; opacity: 0.95; }
+    .hero p { font-size: 1.4rem; max-width: 750px; margin-bottom: 40px; opacity: 0.9; }
+    .btn {
+      background: white;
+      color: #0b2b5c;
+      padding: 16px 44px;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+      transition: 0.3s;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      font-size: 1.1rem;
+    }
+    .btn:hover { background: #f0f4ff; transform: scale(1.05) translateY(-3px); box-shadow: 0 20px 30px rgba(0,40,100,0.3); }
+
+    .tagline-block {
+      background: white;
+      border-radius: 60px 60px 0 0;
+      margin-top: -60px;
+      padding: 60px 24px;
+      text-align: center;
+      box-shadow: 0 -20px 40px rgba(0,0,0,0.02);
+      position: relative;
+      z-index: 5;
+    }
+    .tagline-block h3 { color: #2563eb; font-size: 1.4rem; letter-spacing: 3px; text-transform: uppercase; margin-bottom: 16px; }
+    .tagline-block .big-quote { font-size: 2.4rem; font-weight: 600; color: #0b2b5c; max-width: 1000px; margin: 0 auto; }
+
+    /* common sections */
+    .services-deliver, .about-section, .why-section, .team-section, .portfolio-section, 
+    .testimonials-section, .blog-section, .faq-section, .process-section, .tech-section,
+    .awards-section, .partners-section, .newsletter-section, .career-section, .contact-section {
+      padding: 80px 0;
+    }
+    .section-title { font-size: 2.8rem; color: #0b2b5c; margin-bottom: 20px; }
+    .section-sub { color: #475569; max-width: 700px; margin-bottom: 50px; font-size: 1.3rem; }
+
+    /* cards and grids */
+    .service-grid, .why-grid, .team-grid, .portfolio-grid, .blog-grid, .process-grid, .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 40px;
+    }
+    .service-card, .why-card, .team-member, .process-step, .award-card {
+      background: white;
+      padding: 40px 24px;
+      border-radius: 40px;
+      text-align: center;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.03);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: 1px solid rgba(37,99,235,0.1);
+    }
+    .service-card:hover, .why-card:hover, .team-member:hover, .process-step:hover, .award-card:hover {
+      transform: translateY(-18px) scale(1.02);
+      border-color: #2563eb;
+      box-shadow: 0 30px 40px -15px #2563eb80;
+    }
+    .service-card i, .why-card i, .process-step i { font-size: 3.2rem; color: #2563eb; margin-bottom: 20px; }
+    
+    .service-img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 20px;
+      border: 4px solid #2563eb;
+      transition: transform 0.4s, box-shadow 0.4s;
+      display: block;
+    }
+    .service-card:hover .service-img {
+      transform: rotate(8deg) scale(1.05);
+      box-shadow: 0 15px 25px -8px #2563eb;
+    }
+
+    .team-member img {
+      width: 140px; height: 140px; border-radius: 50%; object-fit: cover; margin-bottom: 20px;
+      border: 5px solid #2563eb; transition: 0.4s;
+    }
+    .team-member:hover img { transform: rotate(6deg) scale(1.05); border-color: #facc15; }
+
+    .portfolio-item {
+      border-radius: 35px; overflow: hidden; box-shadow: 0 12px 25px rgba(0,0,0,0.05);
+      transition: 0.4s; position: relative; height: 260px;
+    }
+    .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s; }
+    .portfolio-item:hover img { transform: scale(1.15); }
+    .portfolio-overlay {
+      position: absolute; inset: 0; background: linear-gradient(to top, #0b2b5cee, transparent);
+      display: flex; align-items: flex-end; padding: 25px; color: white; opacity: 0;
+      transition: 0.3s; font-weight: 700; font-size: 1.3rem;
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+
+    .stats-section { background: linear-gradient(145deg, #0b1a2f, #132b44); color: white; padding: 80px 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 40px; text-align: center; }
+    .stat-item h3 { font-size: 4rem; color: #facc15; }
+
+    /* footer */
+    footer {
+      background: #0b1a2f; color: #cbd5e1; padding: 80px 0 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 50px;
+      margin-bottom: 60px;
+    }
+    .footer-col h4 { color: white; margin-bottom: 25px; font-size: 1.2rem; }
+    .footer-col p, .footer-col a {
+      color: #a0b3d9; text-decoration: none; display: block; margin-bottom: 12px; transition: 0.2s;
+    }
+    .footer-col a:hover { color: white; transform: translateX(8px); }
+    .footer-col i { width: 24px; color: #3b82f6; }
+    .social-links a { font-size: 1.6rem; margin-right: 15px; display: inline-block; }
+    .copyright {
+      border-top: 1px solid #253c5c;
+      padding-top: 30px;
+      text-align: center;
+      color: #6f8ab1;
+    }
+
+    .floating-img { animation: float 4s ease-in-out infinite; }
+    @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-12px); } 100% { transform: translateY(0px); } }
+    .pulse-icon:hover { animation: pulse 1s infinite; }
+    @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.15); } 100% { transform: scale(1); } }
+
+    .about-image { border-radius: 50px; overflow: hidden; box-shadow: 0 40px 50px -20px rgba(0,0,0,0.4); transition: 0.4s; }
+    .about-image:hover { transform: scale(1.02) rotate(1deg); }
+    .career-image img { border-radius: 50px; transition: 0.4s; }
+    .career-image:hover img { transform: scale(1.03); box-shadow: 0 30px 40px -15px #2563eb; }
+
+    /* contact grid */
+    .contact-grid-custom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      margin-top: 40px;
+    }
+    .contact-info-block h3 {
+      font-size: 1.8rem;
+      color: #0b2b5c;
+      margin-bottom: 30px;
+    }
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+    }
+    .contact-detail i {
+      width: 40px;
+      height: 40px;
+      background: #e6f0ff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2563eb;
+      font-size: 1.3rem;
+      transition: 0.3s;
+    }
+    .contact-detail:hover i {
+      background: #2563eb;
+      color: white;
+      transform: scale(1.1) rotate(5deg);
+    }
+    .contact-detail .detail p { margin-bottom: 5px; color: #334155; }
+    .contact-detail .detail .bold { font-weight: 700; color: #0b2b5c; }
+    .social-channel-text { margin: 35px 0 20px; font-style: italic; color: #1e293b; }
+    .social-icons-contact { display: flex; gap: 20px; }
+    .social-icons-contact a {
+      background: #e6f0ff;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #2563eb;
+      font-size: 1.5rem;
+      transition: 0.3s;
+    }
+    .social-icons-contact a:hover {
+      background: #2563eb;
+      color: white;
+      transform: scale(1.1) translateY(-5px);
+    }
+    .contact-form-block {
+      background: white;
+      padding: 40px;
+      border-radius: 40px;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.03);
+      animation: glowPulse 5s infinite;
+    }
+    @keyframes glowPulse {
+      0% { box-shadow: 0 20px 35px rgba(37,99,235,0.05); }
+      50% { box-shadow: 0 25px 45px rgba(37,99,235,0.15); }
+      100% { box-shadow: 0 20px 35px rgba(37,99,235,0.05); }
+    }
+    .form-field { margin-bottom: 22px; }
+    .form-field label { font-weight: 500; display: block; margin-bottom: 8px; color: #1e293b; }
+    .form-field input, .form-field textarea {
+      width: 100%;
+      padding: 16px 22px;
+      border: 1px solid #d1d5db;
+      border-radius: 50px;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+    .form-field textarea { border-radius: 30px; resize: vertical; }
+    .form-field input:focus, .form-field textarea:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 4px #2563eb20;
+      outline: none;
+      transform: scale(1.01);
+    }
+    .captcha-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      flex-wrap: wrap;
+      margin: 25px 0 15px;
+    }
+    .captcha-code {
+      background: #f0f4fa;
+      padding: 12px 25px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.4rem;
+      letter-spacing: 3px;
+      color: #0b2b5c;
+      border: 1px dashed #2563eb;
+      animation: flicker 3s infinite;
+    }
+    @keyframes flicker {
+      0% { opacity: 1; }
+      50% { opacity: 0.8; background: #e6f0ff; }
+      100% { opacity: 1; }
+    }
+    .refresh-captcha {
+      background: none;
+      border: none;
+      font-size: 1.6rem;
+      color: #2563eb;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .refresh-captcha:hover { transform: rotate(120deg) scale(1.1); color: #1d4ed8; }
+    .submit-btn {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 16px 45px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 15px;
+    }
+    .submit-btn:hover {
+      background: #1d4ed8;
+      transform: scale(1.05) translateY(-3px);
+      box-shadow: 0 15px 25px -8px #2563eb;
+    }
+    @media (max-width: 850px) {
+      .contact-grid-custom { grid-template-columns: 1fr; }
+    }
+    .map-container {
+      margin-top: 60px;
+      border-radius: 40px;
+      overflow: hidden;
+      box-shadow: 0 20px 30px rgba(0,0,0,0.1);
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 350px;
+      border: 0;
+      display: block;
+    }
+    .map-caption {
+      text-align: center;
+      margin-top: 20px;
+      color: #334155;
+      font-weight: 500;
+    }
+
+    .testimonial-card {
+      background: white;
+      padding: 30px;
+      border-radius: 40px;
+      text-align: center;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.03);
+    }
+    .testimonial-card img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 4px solid #2563eb;
+    }
+
+    /* career enhancements */
+    .benefits-grid, .jobs-grid, .culture-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap: 30px;
+      margin: 40px 0;
+    }
+    .benefit-item, .job-item, .culture-item {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 30px;
+      text-align: center;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+      transition: 0.3s;
+    }
+    .benefit-item:hover, .job-item:hover, .culture-item:hover { transform: translateY(-8px); background: #f0f7ff; }
+    .job-item h4 { color: #0b2b5c; margin-bottom: 8px; }
+    .job-tag { background: #2563eb; color: white; border-radius: 50px; padding: 4px 16px; display: inline-block; font-size: 0.9rem; margin-top: 10px; }
+    .culture-item i { font-size: 2.5rem; color: #2563eb; margin-bottom: 15px; }
+
+    /* timeline for about */
+    .timeline { display: flex; flex-wrap: wrap; gap: 30px; margin: 50px 0; }
+    .milestone { background: white; border-radius: 40px; padding: 30px; flex: 1 1 200px; box-shadow: 0 5px 20px rgba(0,0,0,0.02); }
+    .milestone h3 { color: #2563eb; }
+
+    /* faq */
+    .faq-item { background: white; border-radius: 30px; margin-bottom: 15px; padding: 20px 30px; cursor: pointer; transition: 0.3s; }
+    .faq-question { font-weight: 600; display: flex; justify-content: space-between; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: 0.3s; color: #334155; }
+    .faq-item.active .faq-answer { max-height: 200px; margin-top: 15px; }
+  </style>
+</head>
+<body>
+<header>
+  <div class="container header-inner">
+    <div class="logo"  id="logoHome" >WEBOTIX</div>
+    <div class="hamburger" id="hamburger"><i class="fas fa-bars"></i></div>
+    <nav class="nav-menu" id="navMenu">
+      <a class="page-link active-page" data-page="home">Home</a>
+      <a class="page-link" data-page="about">About</a>
+      <a class="page-link" data-page="services">Services</a>
+      <a class="page-link" data-page="why">Why Webotix</a>
+      <a class="page-link" data-page="portfolio">Portfolio</a>
+      <a class="page-link" data-page="insights">Insights</a>
+      <a class="page-link" data-page="career">Career</a>
+      <a class="page-link" data-page="contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- HOME page with enhanced background -->
+  <div id="home" class="page active">
+    <section class="hero floating-bg" data-aos="fade-in">
+      <div class="container">
+        <h1 data-aos="fade-up">Beyond Code,<br>We Build Futures</h1>
+        <div class="subhead" data-aos="fade-up" data-aos-delay="100">IT consulting • product engineering • digital transformation</div>
+        <p data-aos="fade-up" data-aos-delay="200">Highly Tailored IT Design, Management & Support Services.</p>
+        <a href="#" class="btn page-link" data-page="contact" data-aos="zoom-in" data-aos-delay="300">Explore solutions →</a>
+      </div>
+    </section>
+    <div class="tagline-block container" data-aos="fade-up">
+      <h3>Industries we Serve</h3>
+      <div class="big-quote">Services We Deliver — we provide truly prominent IT solutions.</div>
+    </div>
+    <div class="container" style="padding: 40px 24px 80px; text-align: center;" data-aos="fade-up">
+      <img src="https://pbs.twimg.com/profile_images/1571916969292734464/sKL0syDz_400x400.jpg" alt="collaboration" style="max-width:100%; border-radius: 60px; box-shadow: 0 30px 40px -20px #000; margin-bottom: 30px; border: 5px solid white;">
+      <div style="display: flex; gap: 20px; flex-wrap: wrap; justify-content: center;">
+        <i class="fas fa-microchip fa-3x pulse-icon" style="color:#2563eb;"></i>
+        <i class="fas fa-cloud fa-3x pulse-icon" style="color:#2563eb;"></i>
+        <i class="fas fa-shield-alt fa-3x pulse-icon" style="color:#2563eb;"></i>
+        <i class="fas fa-robot fa-3x pulse-icon" style="color:#2563eb;"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- ABOUT page with more info (timeline, expanded team, values) -->
+  <div id="about" class="page">
+    <section class="about-section">
+      <div class="container about-grid" style="display: flex; gap: 80px; align-items: center; flex-wrap: wrap;">
+        <div class="about-text" data-aos="fade-right">
+          <h2>ABOUT US</h2>
+          <p>We prefer to offer a solid, reliable and efficient level of customer service from our support team, it’s best to follow a plan. With over 15 years of combined experience, we deliver IT solutions that drive growth.</p>
+          <p class="highlight" style="font-weight:700; color:#0b2b5c; background:#e6f0ff; padding:16px 32px; border-radius:60px;">Webotix prides itself on unsurpassed superior Quality. Excellence in ingenuity and flexibility</p>
+          <p style="margin-top:20px;">Founded in 2010, Webotix has grown into a trusted partner for startups and enterprises alike. Our mission is to bridge the gap between complex technology and business goals through human‑centered design and robust engineering. We believe in long‑term partnerships, transparency, and continuous innovation.</p>
+          <p><i class="fas fa-check-circle" style="color:#2563eb;"></i> 250+ successful projects   <i class="fas fa-check-circle" style="color:#2563eb; margin-left:20px;"></i> 98% client retention</p>
+          <div style="margin-top: 40px; font-size: 1.2rem;"><i class="fas fa-map-pin" style="color:#2563eb"></i> T-square complex, 2nd floor, near Sai baba Mandir, Satara.</div>
+        </div>
+        <div class="about-image" data-aos="fade-center">
+          <img src="https://www.webotix.in/assets/images/hero/home-reputable-success.webp" alt="office" style="width:100%; border-radius:50px; margin-top:20px;">
+        </div>
+      </div>
+    </section>
+    <!-- timeline / journey -->
+    <section class="container">
+      <h2 class="section-title" data-aos="fade-up">Our journey</h2>
+      <div class="timeline">
+        <div class="milestone"><h3>2010</h3><p>Founded in Satara with 3 engineers, focus on web development.</p></div>
+        <div class="milestone"><h3>2015</h3><p>Expanded to Mumbai, 25+ team members, added mobile & cloud services.</p></div>
+        <div class="milestone"><h3>2020</h3><p>First international client (USA), opened remote-first culture.</p></div>
+        <div class="milestone"><h3>2025</h3><p>250+ projects, 27 experts, serving clients in 5 countries.</p></div>
+      </div>
+    </section>
+    <!-- core values -->
+    <section class="container" style="margin-bottom:40px;">
+      <div style="display:flex; gap:30px; flex-wrap:wrap; align-items:center; background:#fff; border-radius:60px; padding:40px; box-shadow:0 10px 30px rgba(0,0,0,0.02);">
+        <div style="flex:1; min-width:200px;"><img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=2070&auto=format&fit=crop" style="width:100%; border-radius:40px;"></div>
+        <div style="flex:2;"><h3>Our core values</h3><p>Integrity, customer obsession, and technical excellence drive everything we do. We invest in our people and cultivate a culture of curiosity and respect. We believe in delivering measurable business outcomes, not just code.</p></div>
+      </div>
+    </section>
+    <section class="team-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Meet the experts</h2>
+        <div class="team-grid">
+          <div class="team-member"><img src="https://randomuser.me/api/portraits/men/32.jpg" alt=""><h4>Rajesh Kumar</h4><p>Founder & CEO, 20+ years in tech</p></div>
+          <div class="team-member"><img src="https://randomuser.me/api/portraits/women/44.jpg" alt=""><h4>Priya Sharma</h4><p>CTO, cloud & AI specialist</p></div>
+          <div class="team-member"><img src="https://randomuser.me/api/portraits/men/75.jpg" alt=""><h4>Amit Desai</h4><p>Lead Developer, full‑stack expert</p></div>
+          <div class="team-member"><img src="https://randomuser.me/api/portraits/women/68.jpg" alt=""><h4>Neha Gupta</h4><p>Project Manager, Agile coach</p></div>
+          <div class="team-member"><img src="https://randomuser.me/api/portraits/men/46.jpg" alt=""><h4>Rohan Deshmukh</h4><p>Senior Architect, microservices</p></div>
+          <div class="team-member"><img src="https://randomuser.me/api/portraits/women/50.jpg" alt=""><h4>Kavita Joshi</h4><p>UX Director, human‑centered design</p></div>
+          <div class="team-member"><img src="https://randomuser.me/api/portraits/men/62.jpg" alt=""><h4>Vikram Patil</h4><p>DevOps Lead, infrastructure automation</p></div>
+          <div class="team-member"><img src="https://randomuser.me/api/portraits/women/33.jpg" alt=""><h4>Anjali Mehta</h4><p>Data Scientist, AI/ML</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="stats-section">
+      <div class="container stats-grid">
+        <div class="stat-item"><h3 class="counter" data-target="280">0</h3><p>Projects</p></div>
+        <div class="stat-item"><h3 class="counter" data-target="135">0</h3><p>Clients</p></div>
+        <div class="stat-item"><h3 class="counter" data-target="15">0</h3><p>Years</p></div>
+        <div class="stat-item"><h3 class="counter" data-target="27">0</h3><p>Experts</p></div>
+      </div>
+    </section>
+    <section class="awards-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Awards & recognition</h2>
+        <div class="awards-grid">
+          <div class="award-card"><i class="fas fa-trophy"></i><h4>Best IT Firm 2023</h4><p>Maharashtra Tech Awards</p></div>
+          <div class="award-card"><i class="fas fa-medal"></i><h4>Top 10 Web Developers</h4><p>Clutch 2024</p></div>
+          <div class="award-card"><i class="fas fa-award"></i><h4>Innovation Award</h4><p>For AI‑driven analytics</p></div>
+          <div class="award-card"><i class="fas fa-star"></i><h4>Clutch Leaders 2024</h4><p>Top B2B company</p></div>
+          <div class="award-card"><i class="fas fa-globe"></i><h4>Global SIA 2024</h4><p>Software Innovation</p></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- SERVICES page now with 16 core offerings (as before) plus detailed descriptions -->
+  <div id="services" class="page">
+    <section class="services-deliver">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-right">Core offerings</h2>
+        <p class="section-sub" data-aos="fade-right">We deliver end‑to‑end solutions across the digital landscape, from strategy to execution.</p>
+        <div class="service-grid">
+          <!-- all 16 cards (same as before) -->
+          <div class="service-card" data-aos="flip-up">
+            <img class="service-img" src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2070&auto=format&fit=crop" alt="web design">
+            <i class="fas fa-laptop-code"></i><h4>Website Design</h4><p>Responsive, modern UX/UI with conversion focus.</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="50">
+            <img class="service-img" src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt="software">
+            <i class="fas fa-cubes"></i><h4>Software Development</h4><p>Custom business apps, SaaS, microservices.</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="100">
+            <img class="service-img" src="https://images.unsplash.com/photo-1555421689-491a97ff2040?q=80&w=2070&auto=format&fit=crop" alt="seo">
+            <i class="fas fa-chart-line"></i><h4>SEO Services</h4><p>Data-driven ranking, content strategy, analytics.</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="150">
+            <img class="service-img" src="https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=2088&auto=format&fit=crop" alt="ecommerce">
+            <i class="fas fa-cart-shopping"></i><h4>E-Commerce</h4><p>Scalable online stores (Shopify, Magento, custom).</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="200">
+            <img class="service-img" src="https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?q=80&w=2070&auto=format&fit=crop" alt="android">
+            <i class="fab fa-android"></i><h4>Android Development</h4><p>Native (Kotlin) & cross‑platform (Flutter).</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="250">
+            <img class="service-img" src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?q=80&w=2070&auto=format&fit=crop" alt="cybersecurity">
+            <i class="fas fa-shield-alt"></i><h4>Cybersecurity</h4><p>Threat protection, audits, compliance (ISO 27001).</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="300">
+            <img class="service-img" src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop" alt="cloud solutions">
+            <i class="fas fa-cloud"></i><h4>Cloud Solutions</h4><p>AWS, Azure, GCP – migration, architecture, serverless.</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="350">
+            <img class="service-img" src="https://images.unsplash.com/photo-1557838923-2985c318be48?q=80&w=2070&auto=format&fit=crop" alt="digital marketing">
+            <i class="fas fa-bullhorn"></i><h4>Digital Marketing</h4><p>SEO, PPC, social media, email automation.</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="400">
+            <img class="service-img" src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=80&w=2070&auto=format&fit=crop" alt="iOS development">
+            <i class="fab fa-apple"></i><h4>iOS & Mac Apps</h4><p>Swift, SwiftUI, App Store deployment.</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="450">
+            <img class="service-img" src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=2070&auto=format&fit=crop" alt="data analytics">
+            <i class="fas fa-chart-pie"></i><h4>Data Analytics</h4><p>BI, predictive modeling, real‑time dashboards.</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="500">
+            <img class="service-img" src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2070&auto=format&fit=crop" alt="AI ML">
+            <i class="fas fa-robot"></i><h4>AI & Machine Learning</h4><p>NLP, computer vision, custom models.</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="550">
+            <img class="service-img" src="https://images.unsplash.com/photo-1669023414166-3b7caf1a371a?q=80&w=2070&auto=format&fit=crop" alt="DevOps">
+            <i class="fas fa-infinity"></i><h4>DevOps Consulting</h4><p>CI/CD, automation, infrastructure as code.</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="600">
+            <img class="service-img" src="https://images.unsplash.com/photo-1639322537228-f71034b1c1f4?q=80&w=2032&auto=format&fit=crop" alt="blockchain">
+            <i class="fas fa-link"></i><h4>Blockchain Solutions</h4><p>Smart contracts, DApps, web3 integration.</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="650">
+            <img class="service-img" src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=2070&auto=format&fit=crop" alt="IoT">
+            <i class="fas fa-wifi"></i><h4>IoT Development</h4><p>Embedded systems, sensor data platforms.</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="700">
+            <img class="service-img" src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?q=80&w=2070&auto=format&fit=crop" alt="AR/VR">
+            <i class="fas fa-vr-cardboard"></i><h4>AR/VR Experiences</h4><p>Immersive training, 3D product configurators.</p>
+          </div>
+          <div class="service-card" data-aos="flip-up" data-aos-delay="750">
+            <img class="service-img" src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" alt="IT strategy">
+            <i class="fas fa-chart-simple"></i><h4>IT Strategy & Consulting</h4><p>Roadmaps, digital transformation, vendor selection.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="process-section">
+      <div class="container">
+        <h2 class="section-title">Our process</h2>
+        <div class="process-grid">
+          <div class="process-step"><i class="fas fa-lightbulb"></i><h3>Discovery</h3><p>Understand goals, users, tech landscape.</p></div>
+          <div class="process-step"><i class="fas fa-pencil-ruler"></i><h3>Design</h3><p>Wireframes, prototypes, UI/UX.</p></div>
+          <div class="process-step"><i class="fas fa-code"></i><h3>Development</h3><p>Agile sprints, QA, continuous integration.</p></div>
+          <div class="process-step"><i class="fas fa-rocket"></i><h3>Launch</h3><p>Deployment, monitoring, training.</p></div>
+          <div class="process-step"><i class="fas fa-chart-line"></i><h3>Scale</h3><p>Iterate, optimize, support.</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="tech-section">
+      <div class="container">
+        <h2 class="section-title">Technologies we master</h2>
+        <div style="display:flex; flex-wrap:wrap; gap:30px; justify-content:center;">
+          <div style="background:white; border-radius:30px; padding:20px 30px;"><i class="fab fa-react fa-3x"></i> React</div>
+          <div style="background:white; border-radius:30px; padding:20px 30px;"><i class="fab fa-python fa-3x"></i> Python</div>
+          <div style="background:white; border-radius:30px; padding:20px 30px;"><i class="fab fa-aws fa-3x"></i> AWS</div>
+          <div style="background:white; border-radius:30px; padding:20px 30px;"><i class="fas fa-database fa-3x"></i> MySQL</div>
+          <div style="background:white; border-radius:30px; padding:20px 30px;"><i class="fab fa-docker fa-3x"></i> Docker</div>
+          <div style="background:white; border-radius:30px; padding:20px 30px;"><i class="fab fa-kubernetes fa-3x"></i> K8s</div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- WHY WEBOTIX page with more differentiators -->
+  <div id="why" class="page">
+    <section class="why-section">
+      <div class="container">
+        <h2 class="section-title">Why Webotix</h2>
+        <p class="section-sub">What makes us the preferred technology partner for innovative companies.</p>
+        <div class="why-grid">
+          <div class="why-card"><i class="fas fa-crown"></i><h3>PREMIUM PRODUCTS</h3><p>End-to-end product development with accelerators, reducing time‑to‑market by 30%.</p></div>
+          <div class="why-card"><i class="fas fa-microchip"></i><h3>TECHNOLOGY</h3><p>Always ahead with modern languages & DBMS – we adopt emerging tech early.</p></div>
+          <div class="why-card"><i class="fas fa-users"></i><h3>EXPERTS TEAM</h3><p>Multi-disciplinary professionals with average 10+ years experience, ready to go the extra mile.</p></div>
+          <div class="why-card"><i class="fas fa-clock"></i><h3>ON‑TIME DELIVERY</h3><p>Agile execution, guaranteed timelines. 95% of projects delivered on schedule.</p></div>
+          <div class="why-card"><i class="fas fa-handshake"></i><h3>LONG‑TERM PARTNERS</h3><p>98% client retention, true collaboration, and dedicated support teams.</p></div>
+          <div class="why-card"><i class="fas fa-globe"></i><h3>GLOBAL REACH</h3><p>Serving clients across 5 countries, with nearshore/offshore flexibility.</p></div>
+        </div>
+      </div>
+    </section>
+    <section class="partners-section">
+      <div class="container">
+        <h2 class="section-title">Strategic partners</h2>
+        <div style="display:flex; gap:50px; flex-wrap:wrap; justify-content:center;">
+          <i class="fab fa-microsoft fa-4x"></i><i class="fab fa-google fa-4x"></i><i class="fab fa-aws fa-4x"></i><i class="fab fa-ibm fa-4x"></i><i class="fab fa-oracle fa-4x"></i>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- PORTFOLIO page with more projects -->
+  <div id="portfolio" class="page">
+    <section class="portfolio-section">
+      <div class="container">
+        <h2 class="section-title">Portfolio</h2>
+        <p class="section-sub">Selected projects that showcase our expertise and impact.</p>
+        <div class="portfolio-grid">
+          <div class="portfolio-item"><img src="https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2070&auto=format&fit=crop" alt=""><div class="portfolio-overlay">E‑commerce platform – 2M+ users</div></div>
+          <div class="portfolio-item"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop" alt=""><div class="portfolio-overlay">SEO analytics dashboard</div></div>
+          <div class="portfolio-item"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" alt=""><div class="portfolio-overlay">Fintech app – secure payments</div></div>
+          <div class="portfolio-item"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2034&auto=format&fit=crop" alt=""><div class="portfolio-overlay">Cloud migration for healthcare</div></div>
+          <div class="portfolio-item"><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop" alt=""><div class="portfolio-overlay">IoT dashboard for smart factory</div></div>
+          <div class="portfolio-item"><img src="https://mobisoftinfotech.com/resources/wp-content/uploads/2020/04/telehealth-services-1.png" alt=""><div class="portfolio-overlay">Healthcare platform – telemedicine</div></div>
+          <div class="portfolio-item"><img src="https://www.algolia.com/files/live/sites/algolia-assets/files/blogs/bannerimages/what-role-does-ai-play-in-recommendation.webp" alt=""><div class="portfolio-overlay">AI‑based recommendation engine</div></div>
+          <div class="portfolio-item"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoqXjACKBSRTCCC_Xp67Tp8Q-owQkevIFwFA&s" alt=""><div class="portfolio-overlay">Blockchain supply chain</div></div>
+        </div>
+      </div>
+    </section>
+    <section style="background:white; padding:60px 0;">
+      <h3 class="section-title" style="text-align:center;">Trusted by</h3>
+      <div style="display:flex; gap:50px; justify-content:center; flex-wrap:wrap;">
+        <i class="fab fa-microsoft fa-3x"></i><i class="fab fa-google fa-3x"></i><i class="fab fa-amazon fa-3x"></i><i class="fab fa-walmart fa-3x"></i>
+      </div>
+    </section>
+    <section class="testimonials-section">
+      <div class="container">
+        <h2 class="section-title">Client feedback</h2>
+        <div class="swiper mySwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><div class="testimonial-card"><img src="https://randomuser.me/api/portraits/men/45.jpg"><p>"Webotix transformed our online presence. Professional, timely and creative."</p><h5>Vikram Rathore</h5><span>CEO, TechCorp</span></div></div>
+            <div class="swiper-slide"><div class="testimonial-card"><img src="https://randomuser.me/api/portraits/women/63.jpg"><p>"Complex software delivered flawlessly. Excellent support and deep knowledge."</p><h5>Sneha Iyer</h5><span>Founder, StartUp India</span></div></div>
+            <div class="swiper-slide"><div class="testimonial-card"><img src="https://randomuser.me/api/portraits/men/22.jpg"><p>"Their team went above and beyond. Highly recommended."</p><h5>Arjun Mehta</h5><span>CTO, DigitalFirst</span></div></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- INSIGHTS page – more articles -->
+  <div id="insights" class="page">
+    <section class="blog-section">
+      <div class="container">
+        <h2 class="section-title">Latest insights</h2>
+        <p class="section-sub">Thought leadership, trends, and best practices from our experts.</p>
+        <div class="blog-grid" style="grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));">
+          <div class="blog-card"><img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop" style="width:100%; height:200px; object-fit:cover; border-radius:30px 30px 0 0;"><div style="padding:20px;"><h4>Future of AI in business</h4><p>ML reshaping IT services. Read more →</p></div></div>
+          <div class="blog-card"><img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop" style="width:100%; height:200px; object-fit:cover; border-radius:30px 30px 0 0;"><div style="padding:20px;"><h4>Cloud migration trends</h4><p>Secure strategies for 2025. Read more →</p></div></div>
+          <div class="blog-card"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop" style="width:100%; height:200px; object-fit:cover; border-radius:30px 30px 0 0;"><div style="padding:20px;"><h4>SEO that works</h4><p>Data-driven visibility. Read more →</p></div></div>
+          <div class="blog-card"><img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?q=80&w=2070&auto=format&fit=crop" style="width:100%; height:200px; object-fit:cover; border-radius:30px 30px 0 0;"><div style="padding:20px;"><h4>Zero Trust security</h4><p>Protecting remote workforces. Read more →</p></div></div>
+          <div class="blog-card"><img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=1974&auto=format&fit=crop" style="width:100%; height:200px; object-fit:cover; border-radius:30px 30px 0 0;"><div style="padding:20px;"><h4>5G & edge computing</h4><p>What it means for business. Read more →</p></div></div>
+          <div class="blog-card"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" style="width:100%; height:200px; object-fit:cover; border-radius:30px 30px 0 0;"><div style="padding:20px;"><h4>Agile transformation</h4><p>Scaling agile across org. Read more →</p></div></div>
+          <div class="blog-card"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=2070&auto=format&fit=crop" style="width:100%; height:200px; object-fit:cover; border-radius:30px 30px 0 0;"><div style="padding:20px;"><h4>Tech stack optimization</h4><p>Cost vs performance. Read more →</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section style="background:#0b1a2f; color:white; padding:60px 0;">
+      <div class="container">
+        <h2>Stay updated</h2>
+        <div style="display:flex; max-width:500px; margin:30px auto;">
+          <input type="email" placeholder="Your email" style="flex:1; padding:15px; border-radius:60px 0 0 60px; border:none;">
+          <button style="padding:0 30px; border-radius:0 60px 60px 0; background:#2563eb; color:white; border:none;">Subscribe</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CAREER page – expanded with culture, benefits, employee stories, process -->
+  <div id="career" class="page">
+    <section class="career-section">
+      <div class="container" style="display:flex; gap:60px; align-items:center; flex-wrap:wrap;">
+        <div class="career-content">
+          <h2>Career with us</h2>
+          <p>Join a team where innovation meets passion. We're always looking for creative minds in software development, design, and marketing. Grow your skills with cutting-edge projects and a collaborative culture. We offer remote, hybrid and full‑time positions with continuous learning opportunities.</p>
+          <a href="#" class="career-btn" style="background:#2563eb; color:white; padding:16px 44px; border-radius:50px; display:inline-block;">View openings <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="career-image"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" style="width:100%; border-radius:50px;"></div>
+      </div>
+    </section>
+    <!-- Life at Webotix / culture -->
+    <section class="container">
+      <h3 style="font-size:2rem; color:#0b2b5c;">Life at Webotix</h3>
+      <div class="culture-grid">
+        <div class="culture-item"><i class="fas fa-comments"></i><h4>Open communication</h4><p>Flat hierarchy, everyone’s voice matters.</p></div>
+        <div class="culture-item"><i class="fas fa-brain"></i><h4>Continuous learning</h4><p>Weekly knowledge shares, conference budgets.</p></div>
+        <div class="culture-item"><i class="fas fa-heart"></i><h4>Work‑life harmony</h4><p>Flexible hours, remote‑first, no burnout.</p></div>
+        <div class="culture-item"><i class="fas fa-gamepad"></i><h4>Fun events</h4><p>Game nights, retreats, team outings.</p></div>
+        <div class="culture-item"><i class="fas fa-hand-holding-heart"></i><h4>Social impact</h4><p>Paid volunteer days, charity matching.</p></div>
+        <div class="culture-item"><i class="fas fa-dumbbell"></i><h4>Wellness programs</h4><p>Gym reimbursement, mental health support.</p></div>
+      </div>
+    </section>
+    <!-- Benefits section detailed -->
+    <section class="container" style="padding: 40px 0;">
+      <h3 style="font-size:2rem; color:#0b2b5c;">Why join Webotix? — Perks & benefits</h3>
+      <div class="benefits-grid">
+        <div class="benefit-item"><i class="fas fa-laptop-house fa-3x" style="color:#2563eb;"></i><h4>Remote first</h4><p>Flexible work from anywhere in India (or hybrid).</p></div>
+        <div class="benefit-item"><i class="fas fa-chart-line fa-3x" style="color:#2563eb;"></i><h4>Growth budget</h4><p>₹75k/yr learning allowance (courses, conferences, books).</p></div>
+        <div class="benefit-item"><i class="fas fa-heart fa-3x" style="color:#2563eb;"></i><h4>Health & wellness</h4><p>Comprehensive insurance for you and family, plus gym membership.</p></div>
+        <div class="benefit-item"><i class="fas fa-calendar-alt fa-3x" style="color:#2563eb;"></i><h4>Flexi hours</h4><p>Unlimited paid time off (minimum 25 days encouraged).</p></div>
+        <div class="benefit-item"><i class="fas fa-plane fa-3x" style="color:#2563eb;"></i><h4>Annual retreat</h4><p>All‑expenses paid team offsite (domestic/international).</p></div>
+        <div class="benefit-item"><i class="fas fa-baby fa-3x" style="color:#2563eb;"></i><h4>Parental leave</h4><p>6 months maternity, 2 months paternity leave.</p></div>
+      </div>
+    </section>
+    <!-- Employee testimonials -->
+    <section class="container" style="margin: 30px 0;">
+      <h3 style="font-size:2rem; color:#0b2b5c;">From our team</h3>
+      <div style="display:flex; gap:30px; flex-wrap:wrap;">
+        <div style="flex:1; min-width:260px; background:white; border-radius:40px; padding:30px;"><i class="fas fa-quote-left fa-2x" style="color:#2563eb;"></i><p>"Webotix gave me the freedom to explore new tech while working on impactful projects. The culture is truly supportive."</p><h5>– Anjali Mehta, Data Scientist</h5></div>
+        <div style="flex:1; min-width:260px; background:white; border-radius:40px; padding:30px;"><i class="fas fa-quote-left fa-2x" style="color:#2563eb;"></i><p>"I joined as a fresher and within two years I'm leading a module. Mentorship and learning are incredible here."</p><h5>– Rohan Desai, Software Engineer</h5></div>
+      </div>
+    </section>
+    <!-- Application process -->
+    <section class="container">
+      <h3 style="font-size:2rem; color:#0b2b5c;">How we hire</h3>
+      <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center; margin:40px 0;">
+        <div style="background:#e6f0ff; border-radius:50px; padding:20px 30px; text-align:center;"><span style="background:#2563eb; color:white; width:40px; height:40px; display:inline-block; border-radius:50%; line-height:40px; margin-right:10px;">1</span> Apply</div>
+        <div style="background:#e6f0ff; border-radius:50px; padding:20px 30px;"><span style="background:#2563eb; color:white; width:40px; height:40px; display:inline-block; border-radius:50%; line-height:40px; margin-right:10px;">2</span> Introductory chat</div>
+        <div style="background:#e6f0ff; border-radius:50px; padding:20px 30px;"><span style="background:#2563eb; color:white; width:40px; height:40px; display:inline-block; border-radius:50%; line-height:40px; margin-right:10px;">3</span> Technical assignment</div>
+        <div style="background:#e6f0ff; border-radius:50px; padding:20px 30px;"><span style="background:#2563eb; color:white; width:40px; height:40px; display:inline-block; border-radius:50%; line-height:40px; margin-right:10px;">4</span> Panel interview</div>
+        <div style="background:#e6f0ff; border-radius:50px; padding:20px 30px;"><span style="background:#2563eb; color:white; width:40px; height:40px; display:inline-block; border-radius:50%; line-height:40px; margin-right:10px;">5</span> Offer & onboarding</div>
+      </div>
+    </section>
+    <!-- open positions -->
+    <section class="container" style="padding: 20px 0 60px;">
+      <h3 style="font-size:2rem; color:#0b2b5c;">Open positions</h3>
+      <div class="jobs-grid">
+        <div class="job-item"><h4>Senior Frontend Dev</h4><p>React, TypeScript, 5+ yrs. Lead our design system.</p><span class="job-tag">Remote</span></div>
+        <div class="job-item"><h4>Python Backend</h4><p>Django, FastAPI, AWS. Build scalable APIs.</p><span class="job-tag">Hybrid</span></div>
+        <div class="job-item"><h4>UX/UI Designer</h4><p>Figma, user research. Create delightful experiences.</p><span class="job-tag">Full‑time</span></div>
+        <div class="job-item"><h4>DevOps Engineer</h4><p>K8s, Terraform, CI/CD. Automate everything.</p><span class="job-tag">Remote</span></div>
+        <div class="job-item"><h4>Project Manager</h4><p>Agile, technical background. Lead cross‑functional teams.</p><span class="job-tag">Satara office</span></div>
+        <div class="job-item"><h4>SEO Specialist</h4><p>Analytics, content strategy. Drive organic growth.</p><span class="job-tag">Remote</span></div>
+        <div class="job-item"><h4>AI/ML Engineer</h4><p>TensorFlow, NLP. Develop production models.</p><span class="job-tag">Remote</span></div>
+        <div class="job-item"><h4>QA Automation</h4><p>Selenium, Cypress. Ensure quality at scale.</p><span class="job-tag">Hybrid</span></div>
+      </div>
+    </section>
+    <!-- extra team image -->
+    <section class="container" style="margin-bottom:50px;">
+      <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop" style="width:100%; border-radius:60px; max-height:400px; object-fit:cover;">
+    </section>
+    <section class="faq-section">
+      <div class="container">
+        <h2 class="section-title">FAQ</h2>
+        <div class="faq-item"><div class="faq-question">What services? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Website, software, SEO, e‑commerce, Android, AI, cloud and more.</div></div>
+        <div class="faq-item"><div class="faq-question">Remote jobs? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Yes, we offer remote and hybrid positions worldwide.</div></div>
+        <div class="faq-item"><div class="faq-question">How to apply? <i class="fas fa-chevron-down"></i></div><div class="faq-answer">Send your CV to hr@webotix.in or apply via the portal.</div></div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CONTACT page (map already present) -->
+  <div id="contact" class="page">
+    <section class="contact-section">
+      <div class="container">
+        <h2 class="section-title" data-aos="fade-up">Get in touch with us</h2>
+        <div class="contact-grid-custom">
+          <div class="contact-info-block" data-aos="fade-right">
+            <h3>Contact us</h3>
+            <div class="contact-detail"><i class="fas fa-phone-alt"></i><div class="detail"><p class="bold">Call Us :</p><p>+91 7387863963</p></div></div>
+            <div class="contact-detail"><i class="fas fa-envelope"></i><div class="detail"><p class="bold">Email Us :</p><p>mail@webotix.in<br>hr@webotix.in</p></div></div>
+            <div class="contact-detail"><i class="fas fa-map-marker-alt"></i><div class="detail"><p class="bold">Office Address :</p><p>T-square complex. 2nd floor, near Sai baba Mandir, Satara.</p></div></div>
+            <p class="social-channel-text">To make requests for further information, contact us via our social channels.</p>
+            <div class="social-icons-contact"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+          </div>
+          <div class="contact-form-block" data-aos="fade-left">
+            <form id="contactForm">
+              <div class="form-field"><label>Name *</label><input type="text" placeholder="Your full name" required></div>
+              <div class="form-field"><label>Email *</label><input type="email" placeholder="you@example.com" required></div>
+              <div class="form-field"><label>Mobile *</label><input type="tel" placeholder="+91 98765 43210" required></div>
+              <div class="form-field"><label>Message .</label><textarea rows="4" placeholder="How can we help?"></textarea></div>
+              <div class="form-field"><label>Enter captcha *</label><div class="captcha-wrapper"><span class="captcha-code" id="captchaDisplay">WHgXNi</span><button type="button" class="refresh-captcha" id="refreshCaptcha"><i class="fas fa-sync-alt"></i></button></div><input type="text" placeholder="Enter code above" style="margin-top:10px;" required></div>
+              <button type="submit" class="submit-btn">Send message</button>
+            </form>
+          </div>
+        </div>
+        <!-- Live Google Map -->
+        <div class="map-container" data-aos="fade-up">
+          <iframe src="https://maps.google.com/maps?q=Sai%20Baba%20Mandir%20Satara&output=embed" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <p class="map-caption"><i class="fas fa-map-pin"></i> T-square complex, 2nd floor, near Sai Baba Mandir, Satara.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<!-- FOOTER (expanded) -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h4>Webotix</h4>
+        <p><i class="fas fa-location-dot"></i> T-square complex, 2nd floor, near Sai baba Mandir, Satara.</p>
+        <p><i class="fas fa-envelope"></i> mail@webotix.in<br>hr@webotix.in</p>
+        <p><i class="fas fa-phone"></i> +91 7387863963<br>+91 9766353588</p>
+        <p><i class="fas fa-globe"></i> www.webotix.com</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>IT Services</h4>
+        <a href="#">Website Design</a><a href="#">Software Development</a><a href="#">SEO Services</a><a href="#">E-Commerce</a><a href="#">Android Development</a><a href="#">AI & ML</a><a href="#">DevOps</a>
+      </div>
+      <div class="footer-col">
+        <h4>Quick links</h4>
+        <a class="page-link" data-page="home">Home</a><a class="page-link" data-page="about">About Us</a><a class="page-link" data-page="services">Services</a><a class="page-link" data-page="why">Why Webotix</a><a class="page-link" data-page="portfolio">Portfolio</a><a class="page-link" data-page="career">Career With Us</a><a class="page-link" data-page="contact">Contact Us</a><a href="#">Terms & Condition</a><a href="#">Privacy Policy</a><a href="#">Refund Policy</a>
+      </div>
+      <div class="footer-col opening">
+        <h4>OPENING HOURS</h4>
+        <p><span>Mon-Sat :</span> 9:30 - 6:30</p>
+        <p><span>Sunday</span> Holiday</p>
+        <p style="margin-top:20px;"><i class="fas fa-headset"></i> Online 24/7</p>
+      </div>
+    </div>
+    <div class="copyright">© 2025 Webotix. All Rights Reserved.</div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+  (function() {
+    AOS.init({ duration: 800, once: false, offset: 120 });
+
+    const pages = document.querySelectorAll('.page');
+    const navLinks = document.querySelectorAll('.page-link');
+    const logo = document.getElementById('logoHome');
+
+    function showPage(pageId) {
+      pages.forEach(p => p.classList.remove('active'));
+      const activePage = document.getElementById(pageId);
+      if (activePage) activePage.classList.add('active');
+      navLinks.forEach(link => {
+        const linkPage = link.getAttribute('data-page');
+        if (linkPage === pageId) link.classList.add('active-page');
+        else link.classList.remove('active-page');
+      });
+      document.getElementById('navMenu').classList.remove('active');
+      setTimeout(() => { AOS.refresh(); }, 150);
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const pageId = link.getAttribute('data-page');
+        showPage(pageId);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    });
+
+    logo.addEventListener('click', () => showPage('home'));
+
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    hamburger.addEventListener('click', (e) => { e.stopPropagation(); navMenu.classList.toggle('active'); });
+    document.addEventListener('click', (e) => { if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) navMenu.classList.remove('active'); });
+
+    new Swiper('.mySwiper', { loop: true, autoplay: { delay: 4000 }, pagination: { el: '.swiper-pagination', clickable: true } });
+
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const counter = entry.target;
+          const target = +counter.getAttribute('data-target');
+          const update = () => {
+            const current = +counter.innerText;
+            const inc = target / speed;
+            if (current < target) {
+              counter.innerText = Math.ceil(current + inc);
+              setTimeout(update, 20);
+            } else counter.innerText = target;
+          };
+          update();
+          observer.unobserve(counter);
+        }
+      });
+    }, { threshold: 0.5 });
+    counters.forEach(c => observer.observe(c));
+
+    const captchaDisplay = document.getElementById('captchaDisplay');
+    const refreshBtn = document.getElementById('refreshCaptcha');
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', () => {
+        const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+        let captcha = '';
+        for (let i = 0; i < 6; i++) captcha += chars[Math.floor(Math.random() * chars.length)];
+        captchaDisplay.textContent = captcha;
+      });
+    }
+
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        alert('Message sent (demo). Thank you!');
+      });
+    }
+
+    // FAQ toggle
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => item.classList.toggle('active'));
+    });
+  })();
+</script>
+</body>
+</html>
